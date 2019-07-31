@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .footerclass{
+        min-height: 80px;
+        background-color: #ba8987;
+      }
+      .contentclass{
+        min-height: 415px;
+      }
+    </style>
+  </head>
+  <body>
+    {% comment %}
+    ---------------------  Navbar start ---------------------
+    {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'index' %}">Django</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">{{ user.username|upper }}(Dashboard)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </nav>
+    {% comment %}
+    ---------------------  Navbar End ---------------------
+    {% endcomment %}
+
+
+      <div class="contentclass">
+        <div class="container">
+          <div class="jumbotron">
+            {% block content_block %}
+
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+
+
+
+    {% comment %}
+    ---------------------  Footer Start ---------------------
+    {% endcomment %}
+      <div class="footerclass">
+        <p>&copy; ABC Company, 2020.</p>
+      </div>
+    {% comment %}
+    ---------------------  Footer End ---------------------
+    {% endcomment %}
+
+
+  </body>
+</html>

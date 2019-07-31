@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content_block %}
+  <h1>This is our Homepage.</h1>
+  {% if user.is_authenticated %}
+  <h3>Enjoy our services.</h3>
+  {% else %}
+  <h3>Please login for more stuff.</h3>
+  {% endif %}
+{% endblock %}
